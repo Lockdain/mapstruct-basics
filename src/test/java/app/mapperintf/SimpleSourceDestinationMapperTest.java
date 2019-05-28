@@ -5,6 +5,8 @@ import app.pojo.emp.Employee;
 import app.pojo.emp.EmployeeDTO;
 import app.pojo.sample.SimpleDestination;
 import app.pojo.sample.SimpleSource;
+import app.pojo.transaction.Transaction;
+import app.pojo.transaction.TransactionDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -25,6 +28,9 @@ public class SimpleSourceDestinationMapperTest {
 
     @Autowired
     private EmployeeMapper employeeMapper;
+
+    @Autowired
+    private TransactionMapper transactionMapper;
 
     @Test
     public void givenSourceToDestination_whenMaps_thenCorrect() {
@@ -57,5 +63,19 @@ public class SimpleSourceDestinationMapperTest {
         assertEquals(employee.getName(), employeeDTO.getEmployeeName());
         assertEquals(employee.getDivision().getId(), employeeDTO.getDivision().getId());
         assertEquals(employee.getDivision().getName(), employeeDTO.getDivision().getName());
+    }
+
+    @Test
+    public void givenTransactionToTransactionDTO_whenMaps_thenCorrect(){
+        Transaction transaction = new Transaction();
+        transaction.setId(11L);
+        transaction.setTotal(new BigDecimal("1200"));
+
+        TransactionDTO transactionDTO = transactionMapper.toTransactionDTO(transaction);
+        System.out.println("Transaction: " + transaction.toString());
+        System.out.println("TransactionDTO: " + transactionDTO.toString());
+
+        assertEquals(transaction.getTotal().multiply(new BigDecimal("100")).toString(),
+                     transactionDTO.getTotalInCents().toString());
     }
 }
