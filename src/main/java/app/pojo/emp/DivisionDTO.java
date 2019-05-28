@@ -1,11 +1,6 @@
-package app.pojo;
+package app.pojo.emp;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-public class Employee {
+public class DivisionDTO {
     private int id;
     private String name;
 
@@ -23,5 +18,13 @@ public class Employee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "DivisionDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

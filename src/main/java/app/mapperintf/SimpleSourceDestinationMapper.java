@@ -1,7 +1,7 @@
 package app.mapperintf;
 
-import app.pojo.SimpleDestination;
-import app.pojo.SimpleSource;
+import app.pojo.sample.SimpleDestination;
+import app.pojo.sample.SimpleSource;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
