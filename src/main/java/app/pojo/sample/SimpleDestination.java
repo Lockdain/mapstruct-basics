@@ -9,4 +9,6 @@ public class SimpleDestination {
     public String getName() {
         return name;
     }
+
+    private String description;
 }

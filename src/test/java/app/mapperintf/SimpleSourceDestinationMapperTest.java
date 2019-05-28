@@ -3,6 +3,8 @@ package app.mapperintf;
 import app.pojo.emp.Division;
 import app.pojo.emp.Employee;
 import app.pojo.emp.EmployeeDTO;
+import app.pojo.person.Person;
+import app.pojo.person.PersonDTO;
 import app.pojo.sample.SimpleDestination;
 import app.pojo.sample.SimpleSource;
 import app.pojo.transaction.Transaction;
@@ -31,6 +33,9 @@ public class SimpleSourceDestinationMapperTest {
 
     @Autowired
     private TransactionMapper transactionMapper;
+
+    @Autowired
+    private PersonMapper personMapper;
 
     @Test
     public void givenSourceToDestination_whenMaps_thenCorrect() {
@@ -77,5 +82,18 @@ public class SimpleSourceDestinationMapperTest {
 
         assertEquals(transaction.getTotal().multiply(new BigDecimal("100")).toString(),
                      transactionDTO.getTotalInCents().toString());
+    }
+
+    @Test
+    public void giverPersonToPersonDTO_whenMaps_thenCorrect() {
+        Person person = new Person();
+        person.setName("Alex");
+        person.setId(null);
+
+        PersonDTO personDTO = personMapper.personToPersonDTO(person);
+        System.out.println("Person: " + person.toString());
+        System.out.println("PersonDTO: " + personDTO.toString());
+
+        assertNotNull(personDTO);
     }
 }
